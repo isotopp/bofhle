@@ -14,6 +14,12 @@ class GuessResult:
     result: str
 
 
+@dataclass(frozen=True)
+class GameResult:
+    secret: str
+    guesses: list[str]
+
+
 def load_words(path: Path = WORD_LIST_PATH) -> list[str]:
     words = [line.strip().lower() for line in path.read_text().splitlines()]
     return [word for word in words if len(word) == 5]
@@ -60,6 +66,41 @@ def score_words(words: list[str]) -> list[tuple[int, str]]:
 
 def suggest_top(words: list[str], limit: int = 10) -> list[tuple[int, str]]:
     return score_words(words)[:limit]
+
+
+def suggest_coverage(
+    all_words: list[str],
+    candidates: list[str],
+    limit: int = 10,
+) -> list[tuple[int, str]]:
+    scored: list[tuple[int, str]] = []
+    for word in all_words:
+        remaining = sum(1 for candidate in candidates if score_wordle(word, candidate) == "bbbbb")
+        scored.append((remaining, word))
+    scored.sort(key=lambda item: (item[0], item[1]))
+    return scored[:limit]
+
+
+def play_game(secret: str, words: list[str]) -> GameResult:
+    history: list[GuessResult] = []
+    candidates = words
+
+    for _ in range(len(words) + 1):
+        guess = suggest_top(candidates, limit=1)[0][1]
+        result = score_wordle(guess, secret)
+        history.append(GuessResult(guess=guess, result=result))
+        if guess == secret:
+            return GameResult(secret=secret, guesses=[entry.guess for entry in history])
+        candidates = filter_candidates(words, history)
+
+    raise RuntimeError(f"Failed to solve secret {secret}.")
+
+
+def histogram(guess_counts: list[int]) -> dict[int, int]:
+    counts: dict[int, int] = {}
+    for value in guess_counts:
+        counts[value] = counts.get(value, 0) + 1
+    return counts
 
 
 def validate_guess(guess: str, words: list[str]) -> str:
