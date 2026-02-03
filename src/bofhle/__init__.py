@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import sqlite3
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 WORD_LIST_PATH = Path(__file__).resolve().parents[2] / "bofhle.txt"
@@ -24,7 +24,7 @@ def _load_words(path: Path) -> list[str]:
 
 def _score_wordle(guess: str, candidate: str) -> str:
     result = ["b"] * 5
-    candidate_remaining = {}
+    candidate_remaining: dict[str, int] = {}
 
     for idx, (g_letter, c_letter) in enumerate(zip(guess, candidate, strict=True)):
         if g_letter == c_letter:
@@ -46,9 +46,7 @@ def _score_wordle(guess: str, candidate: str) -> str:
 def _filter_candidates(words: list[str], history: list[GuessResult]) -> list[str]:
     candidates = words
     for item in history:
-        candidates = [
-            word for word in candidates if _score_wordle(item.guess, word) == item.result
-        ]
+        candidates = [word for word in candidates if _score_wordle(item.guess, word) == item.result]
     return candidates
 
 
@@ -56,7 +54,7 @@ def _most_likely(candidates: list[str]) -> str:
     if not candidates:
         raise ValueError("No candidates remain.")
 
-    position_counts = [dict() for _ in range(5)]
+    position_counts: list[dict[str, int]] = [dict() for _ in range(5)]
     for word in candidates:
         for idx, letter in enumerate(word):
             bucket = position_counts[idx]
@@ -83,7 +81,7 @@ def _init_db(connection: sqlite3.Connection) -> None:
 
 
 def _store_guess(connection: sqlite3.Connection, guess: str, result: str) -> None:
-    created_at = datetime.now(timezone.utc).isoformat()
+    created_at = datetime.now(UTC).isoformat()
     connection.execute(
         "INSERT INTO guesses (guess, result, created_at) VALUES (?, ?, ?)",
         (guess, result, created_at),
