@@ -34,7 +34,10 @@ Options:
 - `--reset` clears the stored session before continuing.
 - `--guess` your five-letter guess (must be in `bofhle.txt`).
 - `--result` the result pattern using `b`, `y`, `g` (e.g. `bybgb`).
-- `--strategy` `entropy` (default, uses information gain), `most-likely` (frequency-based), or `coverage` (minimizes worst-case).
+- `--strategy` strategy for selecting guesses:
+  - `entropy` (default) - Uses expected information gain to minimize remaining candidates
+  - `most-likely` - Frequency-based heuristic, fast and effective
+  - `coverage` - Maximizes letter elimination (useful for exploration, not solving)
 - `--emoji` display results using emoji squares (default).
 - `--no-emoji` display results using letters.
 - `--test` brute-force all secrets and log results to `bofhle.log`.

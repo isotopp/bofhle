@@ -30,6 +30,14 @@ def test_play_game_solves() -> None:
     assert result.guesses[-1] == "quota"
 
 
+def test_play_game_honors_strategy() -> None:
+    words = ["quota", "paste", "bdiff"]
+    for strategy in ["entropy", "most-likely", "coverage"]:
+        result = play_game("quota", words, strategy=strategy)
+        assert result.secret == "quota"
+        assert result.guesses[-1] == "quota"
+
+
 def test_histogram_counts() -> None:
     counts = histogram([1, 2, 2, 3])
     assert counts == {1: 1, 2: 2, 3: 1}

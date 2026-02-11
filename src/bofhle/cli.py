@@ -50,7 +50,7 @@ def _parse_args() -> argparse.Namespace:
         "--strategy",
         default="entropy",
         choices=["entropy", "most-likely", "coverage"],
-        help="Strategy for selecting the next guess.",
+        help="Strategy: entropy (default, information gain), most-likely (fast), coverage (exploration only).",
     )
     parser.add_argument(
         "--test",
@@ -101,8 +101,13 @@ def main() -> None:
         raise SystemExit("Both --guess and --result are required together.")
 
     if args.test:
-        logger = _configure_test_logger(Path("bofhle.log"))
-        results = [play_game(secret, words) for secret in words]
+        import time
+        log_path = Path(f"bofhle-{args.strategy}.log")
+        logger = _configure_test_logger(log_path)
+
+        start_time = time.time()
+        results = [play_game(secret, words, strategy=args.strategy) for secret in words]
+        elapsed_time = time.time() - start_time
 
         for game_result in results:
             logger.info(
@@ -115,13 +120,18 @@ def main() -> None:
         guess_counts = [len(game_result.guesses) for game_result in results]
         best = min(guess_counts)
         worst = max(guess_counts)
+        average = sum(guess_counts) / len(guess_counts)
         stats = histogram(guess_counts)
 
         logger.info("")
         logger.info("Summary")
+        logger.info("Strategy: %s", args.strategy)
         logger.info("Games: %d", len(results))
         logger.info("Best: %d guesses", best)
         logger.info("Worst: %d guesses", worst)
+        logger.info("Average: %.2f guesses", average)
+        logger.info("Total time: %.2f seconds", elapsed_time)
+        logger.info("Time per game: %.2f ms", (elapsed_time / len(results)) * 1000)
         logger.info("Histogram (guesses -> games):")
         for guesses in sorted(stats):
             logger.info("  %d -> %d", guesses, stats[guesses])

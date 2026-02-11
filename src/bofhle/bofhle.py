@@ -73,6 +73,15 @@ def suggest_coverage(
     candidates: list[str],
     limit: int = 10,
 ) -> list[tuple[int, str]]:
+    """Suggest words that maximize letter elimination.
+
+    Scores words by how many candidates remain if the guess returns "bbbbb"
+    (all letters wrong). Lower scores mean more candidates eliminated.
+
+    This strategy is useful for exploration and narrowing possibilities, but
+    is not designed to solve games (it actively avoids guessing the answer).
+    Best used interactively or as part of a hybrid strategy.
+    """
     scored: list[tuple[int, str]] = []
     for word in all_words:
         remaining = sum(1 for candidate in candidates if score_wordle(word, candidate) == "bbbbb")
@@ -103,7 +112,7 @@ def suggest_entropy(
     return scored[:limit]
 
 
-def play_game(secret: str, words: list[str]) -> GameResult:
+def play_game(secret: str, words: list[str], strategy: str = "entropy") -> GameResult:
     history: list[GuessResult] = []
     candidates = words
 
@@ -112,7 +121,14 @@ def play_game(secret: str, words: list[str]) -> GameResult:
         if len(candidates) == 1:
             guess = candidates[0]
         else:
-            guess = suggest_entropy(words, candidates, limit=1)[0][1]
+            if strategy == "entropy":
+                guess = suggest_entropy(words, candidates, limit=1)[0][1]
+            elif strategy == "most-likely":
+                guess = suggest_top(candidates, limit=1)[0][1]
+            elif strategy == "coverage":
+                guess = suggest_coverage(words, candidates, limit=1)[0][1]
+            else:
+                raise ValueError(f"Unknown strategy: {strategy}")
         result = score_wordle(guess, secret)
         history.append(GuessResult(guess=guess, result=result))
         if guess == secret:
