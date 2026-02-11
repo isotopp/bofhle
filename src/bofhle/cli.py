@@ -12,6 +12,7 @@ from bofhle.bofhle import (
     play_game,
     suggest_coverage,
     suggest_entropy,
+    suggest_shannon,
     suggest_top,
     validate_guess,
     validate_result,
@@ -49,8 +50,11 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--strategy",
         default="entropy",
-        choices=["entropy", "most-likely", "coverage"],
-        help="Strategy: entropy (default, information gain), most-likely (fast), coverage (exploration only).",
+        choices=["entropy", "shannon", "most-likely", "coverage"],
+        help=(
+            "Strategy: entropy (default, expected remaining), shannon (information gain), "
+            "most-likely (fast), coverage (exploration only)."
+        ),
     )
     parser.add_argument(
         "--test",
@@ -161,6 +165,9 @@ def main() -> None:
     if args.strategy == "entropy":
         suggestions = suggest_entropy(words, candidates, limit=10)
         suggestion_label = "Next guesses (expected remaining):"
+    elif args.strategy == "shannon":
+        suggestions = suggest_shannon(words, candidates, limit=10)
+        suggestion_label = "Next guesses (shannon entropy):"
     elif args.strategy == "most-likely":
         suggestions = suggest_top(candidates, limit=10)
         suggestion_label = "Next guesses:"

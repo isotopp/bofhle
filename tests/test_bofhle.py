@@ -1,5 +1,13 @@
-from bofhle.bofhle import (filter_candidates, GuessResult, histogram, play_game, suggest_coverage,
-                           suggest_entropy, suggest_top)
+from bofhle.bofhle import (
+    filter_candidates,
+    GuessResult,
+    histogram,
+    play_game,
+    suggest_coverage,
+    suggest_entropy,
+    suggest_shannon,
+    suggest_top,
+)
 
 
 def test_filter_candidates_matches_wordle_score() -> None:
@@ -15,12 +23,15 @@ def test_suggest_top_and_coverage_return_sorted() -> None:
     top = suggest_top(words, limit=2)
     coverage = suggest_coverage(words, words, limit=2)
     entropy = suggest_entropy(words, words, limit=2)
+    shannon = suggest_shannon(words, words, limit=2)
     assert len(top) == 2
     assert len(coverage) == 2
     assert len(entropy) == 2
+    assert len(shannon) == 2
     assert top[0][0] >= top[1][0]
     assert coverage[0][0] <= coverage[1][0]
     assert entropy[0][0] <= entropy[1][0]
+    assert shannon[0][0] >= shannon[1][0]
 
 
 def test_play_game_solves() -> None:
@@ -32,7 +43,7 @@ def test_play_game_solves() -> None:
 
 def test_play_game_honors_strategy() -> None:
     words = ["quota", "paste", "bdiff"]
-    for strategy in ["entropy", "most-likely", "coverage"]:
+    for strategy in ["entropy", "shannon", "most-likely", "coverage"]:
         result = play_game("quota", words, strategy=strategy)
         assert result.secret == "quota"
         assert result.guesses[-1] == "quota"

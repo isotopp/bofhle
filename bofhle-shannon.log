@@ -14,7 +14,7 @@ secret=beadm guesses=3 path=paste acpid beadm
 secret=blkid guesses=4 path=paste gfind acpid blkid
 secret=bmtoa guesses=3 path=paste brctl bmtoa
 secret=brctl guesses=3 path=paste acpid brctl
-secret=btmon guesses=3 path=paste mkdir btmon
+secret=btmon guesses=3 path=paste tkmib btmon
 secret=btrfs guesses=3 path=paste tsort btrfs
 secret=bwrap guesses=3 path=paste alias bwrap
 secret=byobu guesses=4 path=paste gfind aplay byobu
@@ -33,7 +33,7 @@ secret=choom guesses=4 path=paste gfind aplay choom
 secret=chown guesses=4 path=paste gfind atobm chown
 secret=cjpeg guesses=3 path=paste gzcmp cjpeg
 secret=ckgid guesses=3 path=paste gfind ckgid
-secret=ckint guesses=3 path=paste mkdir ckint
+secret=ckint guesses=3 path=paste tkmib ckint
 secret=ckstr guesses=2 path=paste ckstr
 secret=cksum guesses=3 path=paste acpid cksum
 secret=ckuid guesses=4 path=paste gfind acpid ckuid
@@ -42,7 +42,7 @@ secret=colrm guesses=4 path=paste gfind aplay colrm
 secret=cryfs guesses=3 path=paste fruid cryfs
 secret=ctags guesses=3 path=paste ckint ctags
 secret=ctail guesses=3 path=paste brctl ctail
-secret=ctrun guesses=4 path=paste mkdir acpid ctrun
+secret=ctrun guesses=3 path=paste tkmib ctrun
 secret=cupsd guesses=3 path=paste login cupsd
 secret=cwebp guesses=3 path=paste gzcmp cwebp
 secret=dbsql guesses=3 path=paste acpid dbsql
@@ -64,7 +64,7 @@ secret=fcadm guesses=3 path=paste rmail fcadm
 secret=fdisk guesses=3 path=paste fruid fdisk
 secret=fgrep guesses=4 path=paste gzcmp encfs fgrep
 secret=filan guesses=3 path=paste rmail filan
-secret=fixnt guesses=3 path=paste mkdir fixnt
+secret=fixnt guesses=3 path=paste tkmib fixnt
 secret=fixps guesses=3 path=paste login fixps
 secret=flock guesses=4 path=paste gfind acpid flock
 secret=fmadm guesses=3 path=paste rmail fmadm
@@ -112,7 +112,7 @@ secret=gzcat guesses=4 path=paste brctl axfer gzcat
 secret=gzcmp guesses=2 path=paste gzcmp
 secret=gzexe guesses=3 path=paste gexpr gzexe
 secret=gznew guesses=4 path=paste colrm axfer gznew
-secret=htdbm guesses=3 path=paste mkdir htdbm
+secret=htdbm guesses=3 path=paste tkmib htdbm
 secret=ibadm guesses=3 path=paste rmail ibadm
 secret=iconv guesses=3 path=paste gfind iconv
 secret=idmap guesses=3 path=paste alias idmap
@@ -131,7 +131,7 @@ secret=jexec guesses=4 path=paste colrm acpid jexec
 secret=jinfo guesses=4 path=paste gfind amidi jinfo
 secret=jstat guesses=4 path=paste ckint auchk jstat
 secret=kcalc guesses=4 path=paste rmail auchk kcalc
-secret=kinit guesses=3 path=paste mkdir kinit
+secret=kinit guesses=3 path=paste tkmib kinit
 secret=klist guesses=3 path=paste tsort klist
 secret=kprop guesses=4 path=paste gzcmp auchk kprop
 secret=kstat guesses=3 path=paste ckint kstat
@@ -160,7 +160,7 @@ secret=mkdir guesses=4 path=paste gfind gmake mkdir
 secret=mknod guesses=3 path=paste gfind mknod
 secret=mmcli guesses=4 path=paste gfind acpid mmcli
 secret=mmove guesses=3 path=paste gexpr mmove
-secret=mount guesses=3 path=paste mkdir mount
+secret=mount guesses=3 path=paste tkmib mount
 secret=msgid guesses=3 path=paste fruid msgid
 secret=mtype guesses=2 path=paste mtype
 secret=mvdir guesses=4 path=paste gfind gmake mvdir
@@ -172,7 +172,7 @@ secret=ncftp guesses=2 path=paste ncftp
 secret=newfs guesses=4 path=paste roles acpid newfs
 secret=nginx guesses=3 path=paste gfind nginx
 secret=nmcli guesses=3 path=paste gfind nmcli
-secret=nmtui guesses=3 path=paste mkdir nmtui
+secret=nmtui guesses=3 path=paste tkmib nmtui
 secret=nohup guesses=4 path=paste gzcmp auchk nohup
 secret=nping guesses=4 path=paste gzcmp chgrp nping
 secret=nproc guesses=4 path=paste gzcmp acpid nproc
@@ -255,7 +255,7 @@ secret=roles guesses=2 path=paste roles
 secret=route guesses=3 path=paste acpid route
 secret=rping guesses=4 path=paste gzcmp chgrp rping
 secret=rsync guesses=3 path=paste fruid rsync
-secret=rtmon guesses=3 path=paste mkdir rtmon
+secret=rtmon guesses=3 path=paste tkmib rtmon
 secret=runat guesses=4 path=paste brctl amidi runat
 secret=rview guesses=4 path=paste colrm acpid rview
 secret=rwall guesses=3 path=paste rmail rwall
@@ -282,10 +282,10 @@ secret=tapes guesses=2 path=paste tapes
 secret=tclsh guesses=3 path=paste tsort tclsh
 secret=tcopy guesses=3 path=paste choom tcopy
 secret=timex guesses=3 path=paste acpid timex
-secret=tkmib guesses=3 path=paste mkdir tkmib
+secret=tkmib guesses=2 path=paste tkmib
 secret=tload guesses=3 path=paste brctl tload
-secret=touch guesses=3 path=paste mkdir touch
-secret=troff guesses=4 path=paste mkdir acpid troff
+secret=touch guesses=4 path=paste tkmib acpid touch
+secret=troff guesses=4 path=paste tkmib acpid troff
 secret=truss guesses=3 path=paste tsort truss
 secret=trust guesses=3 path=paste tsort trust
 secret=tsort guesses=2 path=paste tsort
@@ -317,7 +317,7 @@ secret=xcalc guesses=4 path=paste rmail auchk xcalc
 secret=xedit guesses=3 path=paste acpid xedit
 secret=xeyes guesses=3 path=paste roles xeyes
 secret=xhost guesses=3 path=paste tsort xhost
-secret=xinit guesses=3 path=paste mkdir xinit
+secret=xinit guesses=3 path=paste tkmib xinit
 secret=xkill guesses=4 path=paste gfind acpid xkill
 secret=xload guesses=3 path=paste rmail xload
 secret=xlogo guesses=3 path=paste gfind xlogo
@@ -338,15 +338,15 @@ secret=zmore guesses=3 path=paste gexpr zmore
 secret=zpool guesses=3 path=paste gzcmp zpool
 
 Summary
-Strategy: entropy
+Strategy: shannon
 Games: 338
 Best: 1 guesses
 Worst: 4 guesses
 Average: 3.13 guesses
-Total time: 43.56 seconds
-Time per game: 128.87 ms
+Total time: 43.02 seconds
+Time per game: 127.27 ms
 Histogram (guesses -> games):
   1 -> 1
-  2 -> 34
-  3 -> 223
+  2 -> 35
+  3 -> 222
   4 -> 80

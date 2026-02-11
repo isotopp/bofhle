@@ -343,8 +343,8 @@ Games: 338
 Best: 1 guesses
 Worst: 6 guesses
 Average: 3.03 guesses
-Total time: 0.32 seconds
-Time per game: 0.94 ms
+Total time: 0.34 seconds
+Time per game: 0.99 ms
 Histogram (guesses -> games):
   1 -> 1
   2 -> 74

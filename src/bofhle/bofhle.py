@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
@@ -112,6 +113,31 @@ def suggest_entropy(
     return scored[:limit]
 
 
+def suggest_shannon(
+    all_words: list[str],
+    candidates: list[str],
+    limit: int = 10,
+) -> list[tuple[float, str]]:
+    """Score words by Shannon entropy (higher is better)."""
+    scored: list[tuple[float, str]] = []
+    total = len(candidates)
+    for guess in all_words:
+        pattern_counts: dict[str, int] = {}
+        for candidate in candidates:
+            pattern = score_wordle(guess, candidate)
+            pattern_counts[pattern] = pattern_counts.get(pattern, 0) + 1
+
+        entropy = 0.0
+        for count in pattern_counts.values():
+            probability = count / total
+            entropy -= probability * math.log2(probability)
+
+        scored.append((entropy, guess))
+
+    scored.sort(key=lambda item: (-item[0], item[1]))
+    return scored[:limit]
+
+
 def play_game(secret: str, words: list[str], strategy: str = "entropy") -> GameResult:
     history: list[GuessResult] = []
     candidates = words
@@ -123,6 +149,8 @@ def play_game(secret: str, words: list[str], strategy: str = "entropy") -> GameR
         else:
             if strategy == "entropy":
                 guess = suggest_entropy(words, candidates, limit=1)[0][1]
+            elif strategy == "shannon":
+                guess = suggest_shannon(words, candidates, limit=1)[0][1]
             elif strategy == "most-likely":
                 guess = suggest_top(candidates, limit=1)[0][1]
             elif strategy == "coverage":
