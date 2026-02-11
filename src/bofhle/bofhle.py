@@ -81,12 +81,38 @@ def suggest_coverage(
     return scored[:limit]
 
 
+def suggest_entropy(
+    all_words: list[str],
+    candidates: list[str],
+    limit: int = 10,
+) -> list[tuple[float, str]]:
+    """Score words by expected information gain (lower is better)."""
+    scored: list[tuple[float, str]] = []
+    for guess in all_words:
+        # Group candidates by result pattern
+        pattern_groups: dict[str, list[str]] = {}
+        for candidate in candidates:
+            pattern = score_wordle(guess, candidate)
+            pattern_groups.setdefault(pattern, []).append(candidate)
+
+        # Calculate expected remaining candidates (lower is better)
+        expected = sum(len(group) ** 2 for group in pattern_groups.values()) / len(candidates)
+        scored.append((expected, guess))
+
+    scored.sort(key=lambda item: (item[0], item[1]))
+    return scored[:limit]
+
+
 def play_game(secret: str, words: list[str]) -> GameResult:
     history: list[GuessResult] = []
     candidates = words
 
     for _ in range(len(words) + 1):
-        guess = suggest_top(candidates, limit=1)[0][1]
+        # If only one candidate remains, guess it directly
+        if len(candidates) == 1:
+            guess = candidates[0]
+        else:
+            guess = suggest_entropy(words, candidates, limit=1)[0][1]
         result = score_wordle(guess, secret)
         history.append(GuessResult(guess=guess, result=result))
         if guess == secret:

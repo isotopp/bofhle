@@ -11,6 +11,7 @@ from bofhle.bofhle import (
     load_words,
     play_game,
     suggest_coverage,
+    suggest_entropy,
     suggest_top,
     validate_guess,
     validate_result,
@@ -47,8 +48,8 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--strategy",
-        default="most-likely",
-        choices=["most-likely", "coverage"],
+        default="entropy",
+        choices=["entropy", "most-likely", "coverage"],
         help="Strategy for selecting the next guess.",
     )
     parser.add_argument(
@@ -147,11 +148,14 @@ def main() -> None:
     if not candidates:
         raise SystemExit("No candidates remain. Check your inputs or reset the database.")
 
-    if args.strategy == "most-likely":
+    if args.strategy == "entropy":
+        suggestions = suggest_entropy(words, candidates, limit=10)
+        suggestion_label = "Next guesses (expected remaining):"
+    elif args.strategy == "most-likely":
         suggestions = suggest_top(candidates, limit=10)
         suggestion_label = "Next guesses:"
     else:
-        suggestions = suggest_coverage(candidates, candidates, limit=10)
+        suggestions = suggest_coverage(words, candidates, limit=10)
         suggestion_label = "Next guesses (min remaining if bbbbb):"
 
     print("guess  result")

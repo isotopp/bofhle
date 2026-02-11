@@ -1,5 +1,5 @@
 from bofhle.bofhle import (filter_candidates, GuessResult, histogram, play_game, suggest_coverage,
-                           suggest_top)
+                           suggest_entropy, suggest_top)
 
 
 def test_filter_candidates_matches_wordle_score() -> None:
@@ -14,10 +14,13 @@ def test_suggest_top_and_coverage_return_sorted() -> None:
     words = ["quota", "paste", "bdiff"]
     top = suggest_top(words, limit=2)
     coverage = suggest_coverage(words, words, limit=2)
+    entropy = suggest_entropy(words, words, limit=2)
     assert len(top) == 2
     assert len(coverage) == 2
+    assert len(entropy) == 2
     assert top[0][0] >= top[1][0]
     assert coverage[0][0] <= coverage[1][0]
+    assert entropy[0][0] <= entropy[1][0]
 
 
 def test_play_game_solves() -> None:

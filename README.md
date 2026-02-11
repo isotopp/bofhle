@@ -26,7 +26,7 @@ The helper stores your history in `~/.bofhle.db` and suggests the next guess.
 ### Command line options
 
 ```
-uv run bofhle [--show] [--reset] [--guess WORD --result PATTERN] [--strategy most-likely|coverage] [--emoji|--no-emoji] [--test]
+uv run bofhle [--show] [--reset] [--guess WORD --result PATTERN] [--strategy entropy|most-likely|coverage] [--emoji|--no-emoji] [--test]
 ```
 
 Options:
@@ -34,7 +34,7 @@ Options:
 - `--reset` clears the stored session before continuing.
 - `--guess` your five-letter guess (must be in `bofhle.txt`).
 - `--result` the result pattern using `b`, `y`, `g` (e.g. `bybgb`).
-- `--strategy` `most-likely` (default) or `coverage`.
+- `--strategy` `entropy` (default, uses information gain), `most-likely` (frequency-based), or `coverage` (minimizes worst-case).
 - `--emoji` display results using emoji squares (default).
 - `--no-emoji` display results using letters.
 - `--test` brute-force all secrets and log results to `bofhle.log`.

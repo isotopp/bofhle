@@ -17,4 +17,4 @@ def test_show_mode_prints_state(tmp_path: Path, monkeypatch, capsys) -> None:
     output = capsys.readouterr().out
 
     assert "Candidates remaining:" in output
-    assert "Next guesses:" in output
+    assert "Next guesses" in output
