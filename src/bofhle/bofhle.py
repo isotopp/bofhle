@@ -138,23 +138,52 @@ def suggest_shannon(
     return scored[:limit]
 
 
-def play_game(secret: str, words: list[str], strategy: str = "entropy") -> GameResult:
+def select_guess_pool(
+    strategy: str,
+    all_words: list[str],
+    candidates: list[str],
+    candidate_only: bool,
+    guess_index: int,
+    candidate_only_after: int,
+) -> list[str]:
+    if strategy == "most-likely":
+        return candidates
+    if candidate_only and guess_index >= candidate_only_after:
+        return candidates
+    return all_words
+
+
+def play_game(
+    secret: str,
+    words: list[str],
+    strategy: str = "entropy",
+    candidate_only: bool = False,
+    candidate_only_after: int = 0,
+) -> GameResult:
     history: list[GuessResult] = []
     candidates = words
 
-    for _ in range(len(words) + 1):
+    for guess_index in range(len(words) + 1):
         # If only one candidate remains, guess it directly
         if len(candidates) == 1:
             guess = candidates[0]
         else:
+            guess_pool = select_guess_pool(
+                strategy,
+                words,
+                candidates,
+                candidate_only,
+                guess_index,
+                candidate_only_after,
+            )
             if strategy == "entropy":
-                guess = suggest_entropy(words, candidates, limit=1)[0][1]
+                guess = suggest_entropy(guess_pool, candidates, limit=1)[0][1]
             elif strategy == "shannon":
-                guess = suggest_shannon(words, candidates, limit=1)[0][1]
+                guess = suggest_shannon(guess_pool, candidates, limit=1)[0][1]
             elif strategy == "most-likely":
                 guess = suggest_top(candidates, limit=1)[0][1]
             elif strategy == "coverage":
-                guess = suggest_coverage(words, candidates, limit=1)[0][1]
+                guess = suggest_coverage(guess_pool, candidates, limit=1)[0][1]
             else:
                 raise ValueError(f"Unknown strategy: {strategy}")
         result = score_wordle(guess, secret)

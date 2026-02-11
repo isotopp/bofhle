@@ -57,6 +57,14 @@ def _parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--candidate",
+        action="store_true",
+        help=(
+            "Use candidate-only guesses for entropy/shannon/coverage. With --test, "
+            "switches to candidate-only after the first two guesses."
+        ),
+    )
+    parser.add_argument(
         "--test",
         action="store_true",
         help="Brute-force test: solve all games and log results.",
@@ -106,11 +114,22 @@ def main() -> None:
 
     if args.test:
         import time
-        log_path = Path(f"bofhle-{args.strategy}.log")
+        log_suffix = "-candidate" if args.candidate else ""
+        log_path = Path(f"bofhle-{args.strategy}{log_suffix}.log")
         logger = _configure_test_logger(log_path)
 
         start_time = time.time()
-        results = [play_game(secret, words, strategy=args.strategy) for secret in words]
+        candidate_only_after = 2 if args.candidate else 0
+        results = [
+            play_game(
+                secret,
+                words,
+                strategy=args.strategy,
+                candidate_only=args.candidate,
+                candidate_only_after=candidate_only_after,
+            )
+            for secret in words
+        ]
         elapsed_time = time.time() - start_time
 
         for game_result in results:
@@ -163,16 +182,19 @@ def main() -> None:
         raise SystemExit("No candidates remain. Check your inputs or reset the database.")
 
     if args.strategy == "entropy":
-        suggestions = suggest_entropy(words, candidates, limit=10)
+        guess_pool = candidates if args.candidate else words
+        suggestions = suggest_entropy(guess_pool, candidates, limit=10)
         suggestion_label = "Next guesses (expected remaining):"
     elif args.strategy == "shannon":
-        suggestions = suggest_shannon(words, candidates, limit=10)
+        guess_pool = candidates if args.candidate else words
+        suggestions = suggest_shannon(guess_pool, candidates, limit=10)
         suggestion_label = "Next guesses (shannon entropy):"
     elif args.strategy == "most-likely":
         suggestions = suggest_top(candidates, limit=10)
         suggestion_label = "Next guesses:"
     else:
-        suggestions = suggest_coverage(words, candidates, limit=10)
+        guess_pool = candidates if args.candidate else words
+        suggestions = suggest_coverage(guess_pool, candidates, limit=10)
         suggestion_label = "Next guesses (min remaining if bbbbb):"
 
     print("guess  result")

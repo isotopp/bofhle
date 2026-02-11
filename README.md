@@ -26,7 +26,7 @@ The helper stores your history in `~/.bofhle.db` and suggests the next guess.
 ### Command line options
 
 ```
-uv run bofhle [--show] [--reset] [--guess WORD --result PATTERN] [--strategy entropy|shannon|most-likely|coverage] [--emoji|--no-emoji] [--test]
+uv run bofhle [--show] [--reset] [--guess WORD --result PATTERN] [--strategy entropy|shannon|most-likely|coverage] [--candidate] [--emoji|--no-emoji] [--test]
 ```
 
 Options:
@@ -39,6 +39,7 @@ Options:
   - `shannon` - Uses Shannon entropy to maximize information gain
   - `most-likely` - Frequency-based heuristic, fast and effective
   - `coverage` - Maximizes letter elimination (useful for exploration, not solving)
+- `--candidate` restricts entropy/shannon/coverage to candidate-only guesses.
 - `--emoji` display results using emoji squares (default).
 - `--no-emoji` display results using letters.
 - `--test` brute-force all secrets and log results to `bofhle.log`.

@@ -1,0 +1,353 @@
+secret=acpid guesses=3 path=paste alias acpid
+secret=alias guesses=3 path=paste blkid alias
+secret=amidi guesses=3 path=paste rmail amidi
+secret=aplay guesses=3 path=paste alias aplay
+secret=atobm guesses=3 path=paste brctl atobm
+secret=auchk guesses=3 path=paste rmail auchk
+secret=audit guesses=3 path=paste brctl audit
+secret=auths guesses=3 path=paste ckint auths
+secret=axfer guesses=3 path=paste acpid axfer
+secret=batch guesses=3 path=paste atobm batch
+secret=bccmd guesses=3 path=paste gfind bccmd
+secret=bdiff guesses=3 path=paste gfind bdiff
+secret=beadm guesses=3 path=paste acpid beadm
+secret=blkid guesses=3 path=paste gfind blkid
+secret=bmtoa guesses=3 path=paste brctl bmtoa
+secret=brctl guesses=3 path=paste acpid brctl
+secret=btmon guesses=3 path=paste mkdir btmon
+secret=btrfs guesses=3 path=paste tsort btrfs
+secret=bwrap guesses=3 path=paste alias bwrap
+secret=byobu guesses=3 path=paste gfind byobu
+secret=bzcat guesses=3 path=paste brctl bzcat
+secret=bzcmp guesses=3 path=paste gzcmp bzcmp
+secret=bzexe guesses=3 path=paste gexpr bzexe
+secret=capsh guesses=2 path=paste capsh
+secret=chacl guesses=3 path=paste rmail chacl
+secret=chage guesses=3 path=paste ckgid chage
+secret=chcon guesses=3 path=paste gfind chcon
+secret=chcpu guesses=3 path=paste gzcmp chcpu
+secret=chgrp guesses=3 path=paste gzcmp chgrp
+secret=chmem guesses=3 path=paste colrm chmem
+secret=chmod guesses=4 path=paste gfind bccmd chmod
+secret=choom guesses=4 path=paste gfind byobu choom
+secret=chown guesses=4 path=paste gfind chcon chown
+secret=cjpeg guesses=3 path=paste gzcmp cjpeg
+secret=ckgid guesses=3 path=paste gfind ckgid
+secret=ckint guesses=3 path=paste mkdir ckint
+secret=ckstr guesses=2 path=paste ckstr
+secret=cksum guesses=3 path=paste acpid cksum
+secret=ckuid guesses=4 path=paste gfind blkid ckuid
+secret=clear guesses=3 path=paste acpid clear
+secret=colrm guesses=4 path=paste gfind byobu colrm
+secret=cryfs guesses=3 path=paste fruid cryfs
+secret=ctags guesses=3 path=paste ckint ctags
+secret=ctail guesses=3 path=paste brctl ctail
+secret=ctrun guesses=3 path=paste mkdir ctrun
+secret=cupsd guesses=3 path=paste login cupsd
+secret=cwebp guesses=3 path=paste gzcmp cwebp
+secret=dbsql guesses=3 path=paste acpid dbsql
+secret=dconf guesses=3 path=paste gfind dconf
+secret=dcopy guesses=3 path=paste gzcmp dcopy
+secret=devnm guesses=3 path=paste colrm devnm
+secret=disks guesses=3 path=paste acpid disks
+secret=djpeg guesses=3 path=paste gzcmp djpeg
+secret=dladm guesses=3 path=paste rmail dladm
+secret=dmesg guesses=3 path=paste roles dmesg
+secret=dwebp guesses=3 path=paste gzcmp dwebp
+secret=egrep guesses=3 path=paste gzcmp egrep
+secret=eject guesses=3 path=paste acpid eject
+secret=elisa guesses=3 path=paste acpid elisa
+secret=emacs guesses=3 path=paste acpid emacs
+secret=encfs guesses=3 path=paste roles encfs
+secret=error guesses=3 path=paste colrm error
+secret=fcadm guesses=3 path=paste rmail fcadm
+secret=fdisk guesses=3 path=paste fruid fdisk
+secret=fgrep guesses=4 path=paste gzcmp egrep fgrep
+secret=filan guesses=3 path=paste rmail filan
+secret=fixnt guesses=3 path=paste mkdir fixnt
+secret=fixps guesses=3 path=paste login fixps
+secret=flock guesses=3 path=paste gfind flock
+secret=fmadm guesses=3 path=paste rmail fmadm
+secret=fruid guesses=3 path=paste gfind fruid
+secret=fsadm guesses=3 path=paste blkid fsadm
+secret=fstyp guesses=3 path=paste alias fstyp
+secret=fuser guesses=2 path=paste fuser
+secret=gchem guesses=3 path=paste colrm gchem
+secret=gcomm guesses=3 path=paste gfind gcomm
+secret=gcore guesses=3 path=paste gexpr gcore
+secret=gdate guesses=3 path=paste axfer gdate
+secret=gdbus guesses=3 path=paste fruid gdbus
+secret=gdiff guesses=3 path=paste gfind gdiff
+secret=gdisk guesses=3 path=paste fruid gdisk
+secret=gecho guesses=3 path=paste colrm gecho
+secret=getty guesses=3 path=paste acpid getty
+secret=gexpr guesses=3 path=paste gzcmp gexpr
+secret=gfind guesses=2 path=paste gfind
+secret=gfold guesses=3 path=paste gfind gfold
+secret=ggrep guesses=3 path=paste gzcmp ggrep
+secret=ghead guesses=3 path=paste acpid ghead
+secret=gjoin guesses=3 path=paste gfind gjoin
+secret=gkill guesses=3 path=paste gfind gkill
+secret=glink guesses=3 path=paste gfind glink
+secret=gmake guesses=3 path=paste ckgid gmake
+secret=gneqn guesses=3 path=paste colrm gneqn
+secret=gnice guesses=3 path=paste gexpr gnice
+secret=gperl guesses=4 path=paste gzcmp gexpr gperl
+secret=gpgsm guesses=3 path=paste login gpgsm
+secret=gprof guesses=3 path=paste gzcmp gprof
+secret=groff guesses=3 path=paste gfind groff
+secret=grops guesses=3 path=paste login grops
+secret=grpck guesses=3 path=paste gzcmp grpck
+secret=gsort guesses=3 path=paste tsort gsort
+secret=gstty guesses=3 path=paste acpid gstty
+secret=gsync guesses=3 path=paste fruid gsync
+secret=gtabs guesses=4 path=paste ckint auths gtabs
+secret=gtail guesses=3 path=paste brctl gtail
+secret=gtest guesses=2 path=paste gtest
+secret=gtput guesses=3 path=paste choom gtput
+secret=gtrue guesses=2 path=paste gtrue
+secret=gtset guesses=3 path=paste atobm gtset
+secret=guniq guesses=4 path=paste gfind gjoin guniq
+secret=gzcat guesses=3 path=paste brctl gzcat
+secret=gzcmp guesses=2 path=paste gzcmp
+secret=gzexe guesses=3 path=paste gexpr gzexe
+secret=gznew guesses=4 path=paste colrm gneqn gznew
+secret=htdbm guesses=3 path=paste mkdir htdbm
+secret=ibadm guesses=3 path=paste rmail ibadm
+secret=iconv guesses=3 path=paste gfind iconv
+secret=idmap guesses=3 path=paste alias idmap
+secret=iftop guesses=3 path=paste choom iftop
+secret=inetd guesses=3 path=paste acpid inetd
+secret=iotop guesses=3 path=paste choom iotop
+secret=ipadm guesses=3 path=paste alias ipadm
+secret=ipcmk guesses=3 path=paste gzcmp ipcmk
+secret=ipcrm guesses=3 path=paste gzcmp ipcrm
+secret=iwspy guesses=2 path=paste iwspy
+secret=javac guesses=3 path=paste acpid javac
+secret=javah guesses=3 path=paste acpid javah
+secret=javap guesses=2 path=paste javap
+secret=jdeps guesses=3 path=paste alias jdeps
+secret=jexec guesses=3 path=paste colrm jexec
+secret=jinfo guesses=3 path=paste gfind jinfo
+secret=jstat guesses=3 path=paste ckint jstat
+secret=kcalc guesses=3 path=paste rmail kcalc
+secret=kinit guesses=3 path=paste mkdir kinit
+secret=klist guesses=3 path=paste tsort klist
+secret=kprop guesses=3 path=paste gzcmp kprop
+secret=kstat guesses=3 path=paste ckint kstat
+secret=lastb guesses=2 path=paste lastb
+secret=lkbib guesses=3 path=paste gfind lkbib
+secret=login guesses=3 path=paste gfind login
+secret=loweb guesses=3 path=paste colrm loweb
+secret=lsblk guesses=4 path=paste fruid gsync lsblk
+secret=lscpu guesses=3 path=paste login lscpu
+secret=lshal guesses=3 path=paste blkid lshal
+secret=lsipc guesses=3 path=paste login lsipc
+secret=lsmem guesses=3 path=paste roles lsmem
+secret=lsmod guesses=3 path=paste fruid lsmod
+secret=lspci guesses=4 path=paste login lsipc lspci
+secret=lsusb guesses=3 path=paste fruid lsusb
+secret=lzcat guesses=3 path=paste brctl lzcat
+secret=lzcmp guesses=4 path=paste gzcmp bzcmp lzcmp
+secret=mailq guesses=3 path=paste acpid mailq
+secret=mailx guesses=4 path=paste acpid mailq mailx
+secret=mandb guesses=3 path=paste acpid mandb
+secret=mckey guesses=3 path=paste colrm mckey
+secret=mcomp guesses=3 path=paste gzcmp mcomp
+secret=mcopy guesses=3 path=paste gzcmp mcopy
+secret=minfo guesses=4 path=paste gfind jinfo minfo
+secret=mkdir guesses=3 path=paste gfind mkdir
+secret=mknod guesses=3 path=paste gfind mknod
+secret=mmcli guesses=4 path=paste gfind lkbib mmcli
+secret=mmove guesses=3 path=paste gexpr mmove
+secret=mount guesses=3 path=paste mkdir mount
+secret=msgid guesses=3 path=paste fruid msgid
+secret=mtype guesses=2 path=paste mtype
+secret=mvdir guesses=4 path=paste gfind mkdir mvdir
+secret=mxtar guesses=3 path=paste brctl mxtar
+secret=mysql guesses=3 path=paste acpid mysql
+secret=named guesses=3 path=paste acpid named
+secret=namei guesses=3 path=paste acpid namei
+secret=ncftp guesses=2 path=paste ncftp
+secret=newfs guesses=4 path=paste roles encfs newfs
+secret=nginx guesses=3 path=paste gfind nginx
+secret=nmcli guesses=3 path=paste gfind nmcli
+secret=nmtui guesses=3 path=paste mkdir nmtui
+secret=nohup guesses=4 path=paste gzcmp kprop nohup
+secret=nping guesses=3 path=paste gzcmp nping
+secret=nproc guesses=4 path=paste gzcmp dcopy nproc
+secret=nroff guesses=3 path=paste gfind nroff
+secret=nscfg guesses=3 path=paste fruid nscfg
+secret=nstat guesses=3 path=paste ckint nstat
+secret=oscap guesses=3 path=paste acpid oscap
+secret=pacat guesses=3 path=paste alias pacat
+secret=pacmd guesses=3 path=paste acpid pacmd
+secret=pactl guesses=3 path=paste acpid pactl
+secret=padsp guesses=3 path=paste acpid padsp
+secret=pager guesses=3 path=paste acpid pager
+secret=pamon guesses=3 path=paste acpid pamon
+secret=parec guesses=3 path=paste acpid parec
+secret=pargs guesses=3 path=paste acpid pargs
+secret=partx guesses=3 path=paste acpid partx
+secret=paste guesses=1 path=paste
+secret=patch guesses=3 path=paste alias patch
+secret=pbget guesses=3 path=paste alias pbget
+secret=pbind guesses=3 path=paste ckgid pbind
+secret=pbput guesses=3 path=paste acpid pbput
+secret=pcred guesses=3 path=paste brctl pcred
+secret=pdiff guesses=3 path=paste ckgid pdiff
+secret=pfcsh guesses=3 path=paste gzcmp pfcsh
+secret=pfctl guesses=3 path=paste axfer pfctl
+secret=pfksh guesses=3 path=paste gzcmp pfksh
+secret=pfzsh guesses=3 path=paste gzcmp pfzsh
+secret=pgrep guesses=3 path=paste brctl pgrep
+secret=pgsql guesses=2 path=paste pgsql
+secret=phang guesses=2 path=paste phang
+secret=pidof guesses=4 path=paste ckgid pdiff pidof
+secret=pinky guesses=3 path=paste ckgid pinky
+secret=pkcon guesses=3 path=paste ckgid pkcon
+secret=pkgmk guesses=3 path=paste ckgid pkgmk
+secret=pkgrm guesses=4 path=paste ckgid pkgmk pkgrm
+secret=pkill guesses=3 path=paste ckgid pkill
+secret=pkmon guesses=3 path=paste ckgid pkmon
+secret=pldes guesses=2 path=paste pldes
+secret=plget guesses=3 path=paste alias plget
+secret=plgrp guesses=3 path=paste ckgid plgrp
+secret=plser guesses=2 path=paste plser
+secret=ports guesses=2 path=paste ports
+secret=ppdpo guesses=3 path=paste ckgid ppdpo
+secret=ppgsz guesses=3 path=paste gzcmp ppgsz
+secret=ppriv guesses=3 path=paste ckgid ppriv
+secret=prctl guesses=3 path=paste axfer prctl
+secret=preap guesses=2 path=paste preap
+secret=print guesses=3 path=paste acpid print
+secret=prove guesses=2 path=paste prove
+secret=proxy guesses=3 path=paste ckgid proxy
+secret=psicc guesses=3 path=paste gzcmp psicc
+secret=pslog guesses=3 path=paste gzcmp pslog
+secret=psnup guesses=3 path=paste gzcmp psnup
+secret=psset guesses=2 path=paste psset
+secret=pstop guesses=2 path=paste pstop
+secret=ptime guesses=3 path=paste acpid ptime
+secret=ptree guesses=3 path=paste acpid ptree
+secret=pwait guesses=2 path=paste pwait
+secret=pwgen guesses=3 path=paste brctl pwgen
+secret=pydoc guesses=3 path=paste ckgid pydoc
+secret=qdbus guesses=4 path=paste fruid gdbus qdbus
+secret=qgltf guesses=3 path=paste acpid qgltf
+secret=qlalr guesses=3 path=paste rmail qlalr
+secret=qmake guesses=3 path=paste ckgid qmake
+secret=qmljs guesses=4 path=paste fruid gsync qmljs
+secret=qperf guesses=3 path=paste gzcmp qperf
+secret=quota guesses=2 path=paste quota
+secret=rbash guesses=3 path=paste blkid rbash
+secret=rdate guesses=3 path=paste axfer rdate
+secret=rdmsr guesses=3 path=paste fruid rdmsr
+secret=refer guesses=3 path=paste colrm refer
+secret=remsh guesses=3 path=paste roles remsh
+secret=reset guesses=3 path=paste atobm reset
+secret=rgrep guesses=5 path=paste gzcmp egrep fgrep rgrep
+secret=rmail guesses=2 path=paste rmail
+secret=rmdir guesses=4 path=paste gfind mkdir rmdir
+secret=rmmod guesses=4 path=paste gfind bccmd rmmod
+secret=rnano guesses=3 path=paste rmail rnano
+secret=roles guesses=2 path=paste roles
+secret=route guesses=3 path=paste acpid route
+secret=rping guesses=4 path=paste gzcmp nping rping
+secret=rsync guesses=3 path=paste fruid rsync
+secret=rtmon guesses=3 path=paste mkdir rtmon
+secret=runat guesses=4 path=paste brctl mxtar runat
+secret=rview guesses=4 path=paste colrm refer rview
+secret=rwall guesses=3 path=paste rmail rwall
+secret=rygel guesses=3 path=paste colrm rygel
+secret=saned guesses=2 path=paste saned
+secret=sdiff guesses=3 path=paste fruid sdiff
+secret=share guesses=2 path=paste share
+secret=shred guesses=3 path=paste roles shred
+secret=skill guesses=3 path=paste fruid skill
+secret=sleep guesses=3 path=paste alias sleep
+secret=snacc guesses=3 path=paste blkid snacc
+secret=snice guesses=2 path=paste snice
+secret=snmpd guesses=3 path=paste login snmpd
+secret=snoop guesses=3 path=paste login snoop
+secret=socat guesses=3 path=paste ckint socat
+secret=spell guesses=3 path=paste alias spell
+secret=split guesses=3 path=paste alias split
+secret=spray guesses=3 path=paste acpid spray
+secret=sprof guesses=3 path=paste login sprof
+secret=sshfs guesses=4 path=paste fruid nscfg sshfs
+secret=strip guesses=3 path=paste alias strip
+secret=sxadm guesses=4 path=paste blkid fsadm sxadm
+secret=tapes guesses=2 path=paste tapes
+secret=tclsh guesses=3 path=paste tsort tclsh
+secret=tcopy guesses=3 path=paste choom tcopy
+secret=timex guesses=3 path=paste acpid timex
+secret=tkmib guesses=3 path=paste mkdir tkmib
+secret=tload guesses=3 path=paste brctl tload
+secret=touch guesses=3 path=paste mkdir touch
+secret=troff guesses=4 path=paste mkdir ctrun troff
+secret=truss guesses=3 path=paste tsort truss
+secret=trust guesses=3 path=paste tsort trust
+secret=tsort guesses=2 path=paste tsort
+secret=uflow guesses=3 path=paste gfind uflow
+secret=umask guesses=3 path=paste blkid umask
+secret=uname guesses=3 path=paste ckgid uname
+secret=units guesses=3 path=paste acpid units
+secret=unrar guesses=3 path=paste rmail unrar
+secret=unzip guesses=3 path=paste gzcmp unzip
+secret=usbip guesses=3 path=paste login usbip
+secret=users guesses=3 path=paste roles users
+secret=ustat guesses=4 path=paste ckint jstat ustat
+secret=uuidd guesses=3 path=paste gfind uuidd
+secret=vigpg guesses=4 path=paste gzcmp nping vigpg
+secret=virsh guesses=3 path=paste fruid virsh
+secret=vwebp guesses=4 path=paste gzcmp dwebp vwebp
+secret=watch guesses=3 path=paste atobm watch
+secret=wdctl guesses=3 path=paste acpid wdctl
+secret=which guesses=3 path=paste gfind which
+secret=whodo guesses=3 path=paste gfind whodo
+secret=whois guesses=3 path=paste fruid whois
+secret=write guesses=3 path=paste acpid write
+secret=wrmsr guesses=3 path=paste fruid wrmsr
+secret=wsgen guesses=3 path=paste roles wsgen
+secret=xargs guesses=2 path=paste xargs
+secret=xauth guesses=2 path=paste xauth
+secret=xbiff guesses=3 path=paste gfind xbiff
+secret=xcalc guesses=4 path=paste rmail kcalc xcalc
+secret=xedit guesses=3 path=paste acpid xedit
+secret=xeyes guesses=3 path=paste roles xeyes
+secret=xhost guesses=3 path=paste tsort xhost
+secret=xinit guesses=3 path=paste mkdir xinit
+secret=xkill guesses=4 path=paste gfind which xkill
+secret=xload guesses=3 path=paste rmail xload
+secret=xlogo guesses=3 path=paste gfind xlogo
+secret=xmlwf guesses=4 path=paste gfind flock xmlwf
+secret=xmore guesses=3 path=paste gexpr xmore
+secret=xprop guesses=4 path=paste gzcmp kprop xprop
+secret=xzcat guesses=4 path=paste brctl gzcat xzcat
+secret=xzcmp guesses=5 path=paste gzcmp bzcmp lzcmp xzcmp
+secret=xzdec guesses=4 path=paste colrm jexec xzdec
+secret=ypcat guesses=2 path=paste ypcat
+secret=ypset guesses=2 path=paste ypset
+secret=zdiff guesses=4 path=paste gfind bdiff zdiff
+secret=zdump guesses=3 path=paste gzcmp zdump
+secret=zgrep guesses=3 path=paste gzcmp zgrep
+secret=zhack guesses=3 path=paste rmail zhack
+secret=zless guesses=3 path=paste roles zless
+secret=zmore guesses=3 path=paste gexpr zmore
+secret=zpool guesses=3 path=paste gzcmp zpool
+
+Summary
+Strategy: entropy
+Games: 338
+Best: 1 guesses
+Worst: 5 guesses
+Average: 3.03 guesses
+Total time: 43.75 seconds
+Time per game: 129.43 ms
+Histogram (guesses -> games):
+  1 -> 1
+  2 -> 34
+  3 -> 259
+  4 -> 42
+  5 -> 2

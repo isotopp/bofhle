@@ -3,6 +3,7 @@ from bofhle.bofhle import (
     GuessResult,
     histogram,
     play_game,
+    select_guess_pool,
     suggest_coverage,
     suggest_entropy,
     suggest_shannon,
@@ -52,3 +53,52 @@ def test_play_game_honors_strategy() -> None:
 def test_histogram_counts() -> None:
     counts = histogram([1, 2, 2, 3])
     assert counts == {1: 1, 2: 2, 3: 1}
+
+
+def test_select_guess_pool_respects_candidate_mode() -> None:
+    all_words = ["alpha", "bravo", "candy"]
+    candidates = ["alpha", "candy"]
+    assert (
+        select_guess_pool(
+            "entropy",
+            all_words,
+            candidates,
+            candidate_only=False,
+            guess_index=0,
+            candidate_only_after=0,
+        )
+        == all_words
+    )
+    assert (
+        select_guess_pool(
+            "entropy",
+            all_words,
+            candidates,
+            candidate_only=True,
+            guess_index=0,
+            candidate_only_after=1,
+        )
+        == all_words
+    )
+    assert (
+        select_guess_pool(
+            "entropy",
+            all_words,
+            candidates,
+            candidate_only=True,
+            guess_index=1,
+            candidate_only_after=1,
+        )
+        == candidates
+    )
+    assert (
+        select_guess_pool(
+            "most-likely",
+            all_words,
+            candidates,
+            candidate_only=False,
+            guess_index=0,
+            candidate_only_after=0,
+        )
+        == candidates
+    )
