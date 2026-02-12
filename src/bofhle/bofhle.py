@@ -146,8 +146,6 @@ def select_guess_pool(
     guess_index: int,
     candidate_only_after: int,
 ) -> list[str]:
-    if strategy == "most-likely":
-        return candidates
     if candidate_only and guess_index >= candidate_only_after:
         return candidates
     return all_words
@@ -157,7 +155,7 @@ def play_game(
     secret: str,
     words: list[str],
     strategy: str = "entropy",
-    candidate_only: bool = False,
+    candidate_only: bool = True,
     candidate_only_after: int = 0,
 ) -> GameResult:
     history: list[GuessResult] = []
@@ -181,7 +179,7 @@ def play_game(
             elif strategy == "shannon":
                 guess = suggest_shannon(guess_pool, candidates, limit=1)[0][1]
             elif strategy == "most-likely":
-                guess = suggest_top(candidates, limit=1)[0][1]
+                guess = suggest_top(guess_pool, limit=1)[0][1]
             elif strategy == "coverage":
                 guess = suggest_coverage(guess_pool, candidates, limit=1)[0][1]
             else:

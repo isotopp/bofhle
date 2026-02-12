@@ -100,5 +100,5 @@ def test_select_guess_pool_respects_candidate_mode() -> None:
             guess_index=0,
             candidate_only_after=0,
         )
-        == candidates
+        == all_words
     )

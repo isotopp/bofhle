@@ -49,21 +49,29 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--strategy",
-        default="entropy",
+        default="most-likely",
         choices=["entropy", "shannon", "most-likely", "coverage"],
         help=(
-            "Strategy: entropy (default, expected remaining), shannon (information gain), "
-            "most-likely (fast), coverage (exploration only)."
+            "Strategy: most-likely (default, fast), entropy (expected remaining), shannon (information gain), "
+            "coverage (exploration only)."
         ),
     )
-    parser.add_argument(
+    candidate_group = parser.add_mutually_exclusive_group()
+    candidate_group.add_argument(
         "--candidate",
         action="store_true",
         help=(
-            "Use candidate-only guesses for entropy/shannon/coverage. With --test, "
+            "Use candidate-only guesses (default). With --test, "
             "switches to candidate-only after the first two guesses."
         ),
     )
+    candidate_group.add_argument(
+        "--words",
+        dest="candidate",
+        action="store_false",
+        help="Use the full word list for guesses (opposite of --candidate).",
+    )
+    parser.set_defaults(candidate=True)
     parser.add_argument(
         "--test",
         action="store_true",
@@ -190,7 +198,8 @@ def main() -> None:
         suggestions = suggest_shannon(guess_pool, candidates, limit=10)
         suggestion_label = "Next guesses (shannon entropy):"
     elif args.strategy == "most-likely":
-        suggestions = suggest_top(candidates, limit=10)
+        guess_pool = candidates if args.candidate else words
+        suggestions = suggest_top(guess_pool, limit=10)
         suggestion_label = "Next guesses:"
     else:
         guess_pool = candidates if args.candidate else words
