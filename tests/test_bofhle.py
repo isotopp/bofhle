@@ -1,6 +1,6 @@
 from bofhle.bofhle import (
-    filter_candidates,
     GuessResult,
+    filter_candidates,
     histogram,
     play_game,
     select_guess_pool,

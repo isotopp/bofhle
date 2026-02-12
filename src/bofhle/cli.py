@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import logging
 import sqlite3
+from collections.abc import Sequence
 from pathlib import Path
 
 from bofhle.bofhle import (
@@ -10,6 +11,7 @@ from bofhle.bofhle import (
     histogram,
     load_words,
     play_game,
+    score_wordle,
     suggest_coverage,
     suggest_entropy,
     suggest_shannon,
@@ -23,7 +25,12 @@ from bofhle.database import DB_PATH, init_db, load_history, reset_db, store_gues
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Bofhle helper")
     parser.add_argument("--guess", help="Your five-letter guess.")
-    parser.add_argument("--result", help="Result string using b/y/g (e.g. bbygg).")
+    result_group = parser.add_mutually_exclusive_group()
+    result_group.add_argument("--result", help="Result string using b/y/g (e.g. bbygg).")
+    result_group.add_argument(
+        "--secret",
+        help="Secret word used to simulate a game result for --guess.",
+    )
     parser.add_argument(
         "--reset",
         action="store_true",
@@ -52,7 +59,8 @@ def _parse_args() -> argparse.Namespace:
         default="most-likely",
         choices=["entropy", "shannon", "most-likely", "coverage"],
         help=(
-            "Strategy: most-likely (default, fast), entropy (expected remaining), shannon (information gain), "
+            "Strategy: most-likely (default, fast), entropy (expected remaining), "
+            "shannon (information gain), "
             "coverage (exploration only)."
         ),
     )
@@ -111,17 +119,19 @@ def main() -> None:
     args = _parse_args()
     words = load_words()
 
-    if args.test and (args.guess or args.result or args.show or args.reset):
+    if args.test and (args.guess or args.result or args.secret or args.show or args.reset):
         raise SystemExit("--test cannot be combined with other options.")
 
-    if args.show and (args.guess or args.result):
-        raise SystemExit("--show cannot be combined with --guess/--result.")
+    if args.show and (args.guess or args.result or args.secret):
+        raise SystemExit("--show cannot be combined with --guess/--result/--secret.")
 
-    if (args.guess and not args.result) or (args.result and not args.guess):
-        raise SystemExit("Both --guess and --result are required together.")
+    has_feedback = bool(args.result or args.secret)
+    if (args.guess and not has_feedback) or (has_feedback and not args.guess):
+        raise SystemExit("Use --guess with exactly one of --result or --secret.")
 
     if args.test:
         import time
+
         log_suffix = "-candidate" if args.candidate else ""
         log_path = Path(f"bofhle-{args.strategy}{log_suffix}.log")
         logger = _configure_test_logger(log_path)
@@ -172,9 +182,13 @@ def main() -> None:
         reset_db(_database_path())
         print("New session started.")
 
-    if args.guess and args.result:
+    if args.guess and has_feedback:
         guess = validate_guess(args.guess, words)
-        result = validate_result(args.result)
+        if args.secret:
+            secret = validate_guess(args.secret, words)
+            result = score_wordle(guess, secret)
+        else:
+            result = validate_result(args.result)
 
         with sqlite3.connect(_database_path()) as connection:
             init_db(connection)
@@ -189,6 +203,7 @@ def main() -> None:
     if not candidates:
         raise SystemExit("No candidates remain. Check your inputs or reset the database.")
 
+    suggestions: Sequence[tuple[int | float, str]]
     if args.strategy == "entropy":
         guess_pool = candidates if args.candidate else words
         suggestions = suggest_entropy(guess_pool, candidates, limit=10)
