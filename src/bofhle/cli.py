@@ -6,6 +6,9 @@ import sqlite3
 from collections.abc import Sequence
 from pathlib import Path
 
+from rich.console import Console
+from rich.text import Text
+
 from bofhle.bofhle import (
     filter_candidates,
     histogram,
@@ -20,6 +23,30 @@ from bofhle.bofhle import (
     validate_result,
 )
 from bofhle.database import DB_PATH, init_db, load_history, reset_db, store_guess
+
+THEMES: dict[str, dict[str, str]] = {
+    # Default palette tuned for light terminal backgrounds.
+    "light": {
+        "b": "white on #2f4f6f",
+        "y": "black on #b8860b",
+        "g": "white on #2e7d32",
+    },
+    "dark": {
+        "b": "white on #3a3a3c",
+        "y": "black on #b59f3b",
+        "g": "white on #538d4e",
+    },
+    "dracula": {
+        "b": "white on #44475a",
+        "y": "black on #f1fa8c",
+        "g": "black on #50fa7b",
+    },
+    "nord": {
+        "b": "white on #4c566a",
+        "y": "black on #ebcb8b",
+        "g": "black on #a3be8c",
+    },
+}
 
 
 def _parse_args() -> argparse.Namespace:
@@ -42,17 +69,23 @@ def _parse_args() -> argparse.Namespace:
         help="Show the current session state.",
     )
     parser.add_argument(
-        "--emoji",
-        dest="emoji",
+        "--color",
+        dest="color",
         action="store_true",
         default=True,
-        help="Display results using emoji squares (default).",
+        help="Display results with colored letter backgrounds (default).",
     )
     parser.add_argument(
-        "--no-emoji",
-        dest="emoji",
+        "--no-color",
+        dest="color",
         action="store_false",
         help="Display results using letters b/y/g.",
+    )
+    parser.add_argument(
+        "--theme",
+        default="light",
+        choices=sorted(THEMES.keys()),
+        help="Color theme to use when --color is enabled.",
     )
     parser.add_argument(
         "--strategy",
@@ -92,11 +125,14 @@ def _database_path() -> Path:
     return DB_PATH
 
 
-def _format_result(result: str, use_emoji: bool) -> str:
-    if not use_emoji:
+def _format_result(result: str, guess: str, use_color: bool, theme: str) -> str | Text:
+    if not use_color:
         return result
-    mapping = {"b": "⬛", "y": "🟨", "g": "🟩"}
-    return "".join(mapping[ch] for ch in result)
+    styles = THEMES[theme]
+    styled = Text()
+    for letter, outcome in zip(guess, result, strict=False):
+        styled.append(f" {letter} ", style=styles[outcome])
+    return styled
 
 
 def _configure_test_logger(log_path: Path) -> logging.Logger:
@@ -221,10 +257,21 @@ def main() -> None:
         suggestions = suggest_coverage(guess_pool, candidates, limit=10)
         suggestion_label = "Next guesses (min remaining if bbbbb):"
 
-    print("guess  result")
-    for row in history_rows:
-        print(f"{row.guess}  {_format_result(row.result, args.emoji)}")
-    print(f"Candidates remaining: {len(candidates)}")
-    print(suggestion_label)
-    for score, word in suggestions:
-        print(f"{score:>4} {word}")
+    if args.color:
+        # Disable automatic syntax highlighting so score numbers are not recolored.
+        console = Console(highlight=False)
+        console.print("guess/result")
+        for row in history_rows:
+            console.print(_format_result(row.result, row.guess, True, args.theme))
+        console.print(f"Candidates remaining: {len(candidates)}")
+        console.print(suggestion_label)
+        for score, word in suggestions:
+            console.print(f"{score:>4} {word}")
+    else:
+        print("guess  result")
+        for row in history_rows:
+            print(f"{row.guess}  {_format_result(row.result, row.guess, False, args.theme)}")
+        print(f"Candidates remaining: {len(candidates)}")
+        print(suggestion_label)
+        for score, word in suggestions:
+            print(f"{score:>4} {word}")
