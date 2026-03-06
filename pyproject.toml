@@ -7,9 +7,7 @@ authors = [
     { name = "Kristian Koehntopp", email = "kris-git@koehntopp.de" }
 ]
 requires-python = ">=3.14"
-dependencies = [
-    "rich",
-]
+dependencies = []
 
 [tool.ruff]
 target-version = "py314"
